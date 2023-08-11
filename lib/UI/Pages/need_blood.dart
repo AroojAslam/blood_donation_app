@@ -13,8 +13,7 @@ class NeedBlood extends StatefulWidget {
 class _NeedBloodState extends State<NeedBlood> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child:
-    Scaffold(
+    return Scaffold(
       appBar: AppBar(
         backgroundColor: darkRed(),
         title: Text('Need Blood',style: TextStyle(color: Colors.white),),
@@ -25,27 +24,60 @@ class _NeedBloodState extends State<NeedBlood> {
           },
         ),
       ),
-      body: ListView.builder(
-        itemCount: 5,
-        itemBuilder: (context, index) {
-        return ListTile(
+      body: SafeArea(
+        child: ListView.builder(
+          itemCount: 2,
+          itemBuilder: (context, index) {
+          return Card(
 
-          leading:CircleAvatar(
-            radius: 50,
-            child: Text('A+',style: TextStyle(fontSize: 20,),),
-          ) ,
-          title:Text('Name',style: TextStyle(fontSize: 20)) ,
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Contant'),
-              Text('Age'),
-              Text('Address'),
-            ],
-          ),
+            child: ListTile(
 
-        );
-      },),
-    ));
+              leading:CircleAvatar(
+                radius: 30,
+                child: Text('A+',style: TextStyle(fontSize: 20,),),
+              ) ,
+              title:Text('Arooj Aslam',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w700)) ,
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Divider(endIndent: 20),
+                  Row(
+                    children: [
+                      Icon(Icons.phone, size: 20,color: Colors.black),
+                      SizedBox(width: 15,),
+                      Text('0336-7469953'),
+
+                    ],
+                  ),
+                  SizedBox(height: 10,),
+                  Row(
+                    children: [
+                  Image(
+                    height: 15,
+                       width: 20,
+                      image: AssetImage('assets/images/age.png')),
+                      SizedBox(width: 15,),
+                      Text('35'),
+
+                    ],
+                  ),
+                 SizedBox(height: 10,),
+              Row(
+                children: [
+                  Icon(Icons.location_on_outlined,
+                  size: 20,color: Colors.black,),
+                  SizedBox(width: 15,),
+                  Text('F-Block'),
+
+                ],
+              ),
+                ],
+              ),
+
+            ),
+          );
+        },),
+      ),
+    );
   }
 }
