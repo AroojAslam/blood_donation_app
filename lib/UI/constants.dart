@@ -82,3 +82,17 @@ Widget bloodGroupCard( String text, VoidCallback ontap ) {
     ),
   );
 }
+
+Widget MyButton(String text, VoidCallback ontap){
+  return  GestureDetector(
+    onTap:ontap ,
+    child: Container(
+      height: 50,
+      width: 250,
+      decoration: BoxDecoration(color: darkRed(),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Center(child: Text(text,style: TextStyle(color: Colors.white,fontSize: 18),)),
+    ),
+  );
+}

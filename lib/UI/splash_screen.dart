@@ -1,6 +1,7 @@
 
 import 'dart:async';
 
+import 'package:blood_donation_app/UI/Auth/login_page.dart';
 import 'package:flutter/material.dart';
 
 import 'Pages/chose_type.dart';
@@ -20,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     Timer(Duration(seconds: 3),() {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => ChoosePage(),));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => LogIn(),));
     },);
   }
   @override

@@ -87,13 +87,11 @@ class _BloodDonationState extends State<BloodDonation> {
                       ],
                     )),
                     SizedBox(height: 20,),
-                    Container(
-                      height: 50,
-                      width: 250,
-                      decoration: BoxDecoration(color: darkRed(),
-                      borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Center(child: Text('Add',style: TextStyle(color: Colors.white,fontSize: 18),)),
+                    MyButton(
+                      'Add',
+                          () {
+
+                      },
                     ),
                     SizedBox(height: 20,),
                   ],

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'UI/Pages/blood_type.dart';
-import 'UI/Pages/chose_type.dart';
-import 'UI/Pages/donate_blood_form.dart';
+import 'UI/Auth/signup_page.dart';
 import 'UI/constants.dart';
 import 'UI/splash_screen.dart';
 
@@ -23,7 +21,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: darkRed()),
         useMaterial3: true,
       ),
-      home: BloodTyps(),
+      home: SignUp(),
     );
   }
 }
