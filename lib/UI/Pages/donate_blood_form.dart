@@ -3,7 +3,9 @@
 
 import 'package:blood_donation_app/UI/Pages/chose_type.dart';
 import 'package:blood_donation_app/UI/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class BloodDonation extends StatefulWidget {
   const BloodDonation({super.key});
@@ -13,15 +15,40 @@ class BloodDonation extends StatefulWidget {
 }
 
 class _BloodDonationState extends State<BloodDonation> {
+  String dropdownvalue = 'A+';
+  var items = [
+    'A+',
+    'A-',
+    'B+',
+    'B-',
+    'AB+',
+    'AB-',
+    'O+',
+    'O-',
+  ];
+  Function(dynamic value) valid() {
+    return (value) {
+      if (value!.isEmpty) {
+        return value;
+      }
+    };
+  }
+  final nameController = TextEditingController();
+  final contactController = TextEditingController();
+  final addressController = TextEditingController();
+  final bloodGroupController = TextEditingController();
+  final ageController = TextEditingController();
+  GlobalKey<FormState> formKey =GlobalKey<FormState>();
+  final auth =FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: darkRed(),
-            title: Text('Donate Blood',style: TextStyle(color: Colors.white),),
+            title: const Text('Donate Blood',style: TextStyle(color: Colors.white),),
             leading: IconButton(
-              icon: Icon(Icons.arrow_back,color: Colors.white),
+              icon:const Icon(Icons.arrow_back,color: Colors.white),
               onPressed: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => ChoosePage(),));
               },
@@ -33,73 +60,197 @@ class _BloodDonationState extends State<BloodDonation> {
                 child: Column(
 
                   children: [
-                    SizedBox(height: 30,),
-                    Image(
+                 const   SizedBox(height: 30,),
+                   const Image(
                       height: 150,
                         width: 150,
                         image: AssetImage('assets/images/need_blood.png')),
-                    SizedBox(height: 20,),
+                  const  SizedBox(height: 20,),
                     Text('Fill This Form',style: TextStyle(color: darkRed(),fontSize: 25,fontWeight: FontWeight.bold),),
-                    Text('If you want to donate the Blood',style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.w400),),
-                    SizedBox(height: 20,),
-                    Form(child: Column(
+                  const  Text('If you want to donate the Blood',style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.w400),),
+                  const  SizedBox(height: 20,),
+                    Form(
+                      key: formKey,
+                        child: Column(
                       children: [
                         Padding(padding: EdgeInsets.symmetric(horizontal: 20),
                         child: TextFormField(
-                             decoration:InputDecoration(
+                          controller: nameController,
+                             decoration:const InputDecoration(
+                               prefixIcon: Icon(Icons.person_outline_rounded),
                                hintText: 'Name'
                              ) ,
+                            validator: (value) {
+                               if(value!.isEmpty){
+                                 return 'Enter Name';
+                                 }},
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(
+                              RegExp(r'^[a-zA-Z ]*$'), // Pattern for allowing only letters and spaces
+                            ),
+                          ],
+                             ),
                         ),
-                        ),
-                        SizedBox(height: 20,),
-                        Padding(padding: EdgeInsets.symmetric(horizontal: 20),
-                          child: TextFormField(
-                            decoration:InputDecoration(
-                                hintText: 'Contact'
-                            ) ,
+                      const  SizedBox(height: 20,),
+                        Padding(padding:const EdgeInsets.symmetric(horizontal: 20),
+                          child:TextFormField(
+                            keyboardType: TextInputType.phone,
+                            controller: contactController,
+                            decoration: const InputDecoration(
+                              prefixIcon: Icon(Icons.phone_outlined),
+                              hintText: 'Contact',
+                            ),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Enter Contact';
+                              }
+                              if (!_isValidPhoneNumber(value)) {
+                                return 'Invalid Contact';
+                              }
+                              return null;
+                            },
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                RegExp(r'^[0-9]*$'), // Pattern for allowing only numeric digits
+                              ),
+                            ],
                           ),
                         ),
-                        SizedBox(height: 20,),
-                        Padding(padding: EdgeInsets.symmetric(horizontal: 20),
+                    const    SizedBox(height: 20,),
+                        Padding(padding:const EdgeInsets.symmetric(horizontal: 20),
                           child: TextFormField(
-                            decoration:InputDecoration(
+                            controller: addressController,
+                            decoration:const InputDecoration(
+                                prefixIcon: Icon(Icons.home_outlined),
                                 hintText: 'Address'
                             ) ,
+                            validator: (value) {
+                              if(value!.isEmpty){
+                                return 'Enter Address';
+                              }},
                           ),
                         ),
-                        SizedBox(height: 20,),
-                        Padding(padding: EdgeInsets.symmetric(horizontal: 20),
+                     const   SizedBox(height: 20,),
+                        Padding(padding:const EdgeInsets.symmetric(horizontal: 20),
                           child: TextFormField(
-                            decoration:InputDecoration(
-                                hintText: 'Blood Group'
-                            ) ,
-                          ),
-                        ),
-                        SizedBox(height: 20,),
-                        Padding(padding: EdgeInsets.symmetric(horizontal: 20),
-                          child: TextFormField(
-                            decoration:InputDecoration(
+                            keyboardType: TextInputType.number,
+                            controller: ageController,
+                            decoration:const InputDecoration(
+                                prefixIcon: Icon(Icons.timeline_outlined),
                                 hintText: 'Age'
                             ) ,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Enter Age';
+                              }
+                              if (!_isValidAge(value)) {
+                                return 'Invalid Age';
+                              }
+                              return null;
+                            },
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                RegExp(r'^[0-9]*$'), // Pattern for allowing only numeric digits
+                              ),
+                              LengthLimitingTextInputFormatter(2),
+                            ],
                           ),
                         ),
-                        SizedBox(height: 20,),
+                      const  SizedBox(height: 20,),
+                        Padding(padding:const EdgeInsets.symmetric(horizontal: 20),
+                          child:  DropdownButton(
+                                  underline: Container(
+                                    height: 2,
+                                    color: darkRed(),
+                                  ),
+                                  borderRadius: BorderRadius.circular(20),
+                                  hint:Text('Select Blood Group'),
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      color: darkRed()
+                                  ),
+                                  isExpanded: true,
+                                  value: dropdownvalue,
+                                  icon: const Icon(Icons.keyboard_arrow_down),
+                                  items: items.map((String items) {
+                                    return DropdownMenuItem(
+
+                                      value: items,
+                                      child: Text(items),
+                                    );
+                                  }).toList(),
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      dropdownvalue = newValue!;
+                                    });
+                                  }
+                              ),
+
+                        ),
+
+                     const   SizedBox(height: 20,),
                       ],
                     )),
-                    SizedBox(height: 20,),
+                  const  SizedBox(height: 20,),
                     MyButton(
-                      'Add',
-                          () {
-
+                      context: context,
+                      text: 'Add',
+                      ontap:   () {
+                      if(formKey.currentState!.validate()){
+                        _showSuccessDialog(context);
+                      }
                       },
                     ),
-                    SizedBox(height: 20,),
+                 const   SizedBox(height: 20,),
                   ],
                 ),
               ),
             ),
           ) ,
     )
+    );
+  }
+  bool _isValidPhoneNumber(String input) {
+    const int desiredLength = 11;
+    final numericOnly = input.replaceAll(RegExp(r'\D'), '');
+    return numericOnly.length == desiredLength;
+  }
+  bool _isValidAge(String input) {
+    final int age = int.tryParse(input) ?? -1; // Parse age as integer, default to -1 if not valid
+    const int minAge = 0; // Minimum age
+    const int maxAge = 150; // Maximum age
+    return age >= minAge && age <= maxAge;
+  }
+  void _showSuccessDialog(BuildContext context) {
+    showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.check_circle,
+                color: Colors.green,
+                size: 48.0,
+              ),
+              SizedBox(height: 16.0),
+              Text(
+                'You are added',
+                style: TextStyle(fontSize: 18.0),
+              ),
+            ],
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ChoosePage(),));
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
     );
   }
 }

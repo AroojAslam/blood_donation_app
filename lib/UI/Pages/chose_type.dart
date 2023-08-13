@@ -1,15 +1,12 @@
 
-
-
-import 'dart:io';
-
 import 'package:blood_donation_app/UI/constants.dart';
+import 'package:blood_donation_app/UI/splash_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'blood_type.dart';
 import 'donate_blood_form.dart';
-import 'need_blood.dart';
 
 class ChoosePage extends StatefulWidget {
   const ChoosePage({super.key});
@@ -19,6 +16,7 @@ class ChoosePage extends StatefulWidget {
 }
 
 class _ChoosePageState extends State<ChoosePage> {
+  final auth= FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -30,7 +28,14 @@ class _ChoosePageState extends State<ChoosePage> {
           appBar: AppBar(
             automaticallyImplyLeading: false,
             backgroundColor: darkRed(),
-            title: Text('Blood Donation',style: TextStyle(color: Colors.white)),
+            title:const Text('Blood Donation',style: TextStyle(color: Colors.white)),
+            actions: [
+              IconButton(onPressed: (){
+              auth.signOut().then((value) => {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => SplashScreen(),))
+              });
+              }, icon:const Icon(Icons.logout, color:Colors.white))
+            ],
           ),
           backgroundColor: Colors.grey.shade50,
           body: SafeArea(
@@ -44,10 +49,10 @@ class _ChoosePageState extends State<ChoosePage> {
                       "Need Blood",
                       Colors.red.shade900,
                       (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => BloodTyps(),));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) =>const BloodTyps(),));
                       }
                     ),
-                    SizedBox(height: 30),
+                  const  SizedBox(height: 30),
                     customCard(
                       Colors.blue,
                         "assets/images/Blood_donation.png",

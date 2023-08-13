@@ -1,7 +1,7 @@
 import 'package:blood_donation_app/UI/Auth/login_page.dart';
 import 'package:blood_donation_app/UI/Pages/chose_type.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import '../constants.dart';
 
 class SignUp extends StatefulWidget {
@@ -12,9 +12,35 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  bool showPassword=true;
+ void  signUp(){
+   if(formKey.currentState!.validate()){
+     setState(() {
+       loading=true;
+     });
+     auth.createUserWithEmailAndPassword(
+         email: emailController.text.toString(),
+         password: passwordController.text.toString()).then((value) => {
+       setState(() {
+         loading=false;
+       }),
+       Navigator.push(context, MaterialPageRoute(builder: (context) => LogIn(),)),
+     }
+     ).onError((error, stackTrace) => {
+       Utils().toastmessage(error.toString()),
+       setState(() {
+         loading=false;
+       }),
+
+     });
+
+   }
+  }
+  bool loading=false;
   final emailController =TextEditingController();
   final passwordController =TextEditingController();
   GlobalKey<FormState> formKey =GlobalKey<FormState>();
+  final auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,6 +73,7 @@ class _SignUpState extends State<SignUp> {
                         child: TextFormField(
                           controller: emailController,
                           decoration:InputDecoration(
+                            prefixIcon: Icon(Icons.email_outlined),
                               hintText: 'Email'
                           ) ,
                           validator: (value) {
@@ -59,8 +86,21 @@ class _SignUpState extends State<SignUp> {
                       SizedBox(height: 20,),
                       Padding(padding: EdgeInsets.symmetric(horizontal: 20),
                         child: TextFormField(
+                          obscureText: showPassword,
                           controller: passwordController,
                           decoration:InputDecoration(
+                              prefixIcon: Icon(Icons.lock_outline),
+                              suffixIcon: showPassword? IconButton(onPressed: (){
+                                setState(() {
+                                  showPassword=!showPassword;
+                                });
+                              },
+                                  icon: Icon(Icons.remove_red_eye_outlined)):
+                              IconButton(onPressed: (){
+                                setState(() {
+                                  showPassword=!showPassword;
+                                });
+                              }, icon: Icon(Icons.visibility_off_outlined,)),
                               hintText: 'Password'
                           ) ,
                           validator: (value) {
@@ -76,12 +116,11 @@ class _SignUpState extends State<SignUp> {
                   )),
                   SizedBox(height: 20,),
                   MyButton(
-                    'Sign Up',
-                        () {
-                      if(formKey.currentState!.validate()){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => LogIn(),));
-                      }
-
+                    context: context,
+                    text: 'Sign Up',
+                      loading: loading,
+                      ontap:   () {
+                        signUp();
                     },
                   ),
                   SizedBox(height: 10,),

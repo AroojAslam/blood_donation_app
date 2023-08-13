@@ -1,11 +1,12 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
-import 'UI/Auth/signup_page.dart';
 import 'UI/constants.dart';
 import 'UI/splash_screen.dart';
 
-void main() {
+void main()async {
   runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
 }
 
 class MyApp extends StatelessWidget {
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: darkRed()),
         useMaterial3: true,
       ),
-      home: SignUp(),
+      home: const SplashScreen(),
     );
   }
 }
