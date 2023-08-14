@@ -29,13 +29,6 @@ class _BloodDonationState extends State<BloodDonation> {
     'O+',
     'O-',
   ];
-  Function(dynamic value) valid() {
-    return (value) {
-      if (value!.isEmpty) {
-        return value;
-      }
-    };
-  }
   final nameController = TextEditingController();
   final contactController = TextEditingController();
   final addressController = TextEditingController();

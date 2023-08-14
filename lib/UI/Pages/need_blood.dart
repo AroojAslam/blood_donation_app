@@ -60,6 +60,7 @@ class _NeedBloodState extends State<NeedBlood> {
                   final Contact=snapshot.child('Contact').value.toString();
                   final Age=snapshot.child('age').value.toString();
                   final Address=snapshot.child('Address').value.toString();
+                  final id =snapshot.child('id').value.toString();
                   if(Blood_Group.toLowerCase().contains(widget.blood_type.toLowerCase().toString())){
                     return  Padding(
                       padding: EdgeInsets.symmetric(horizontal: 10),
@@ -74,7 +75,7 @@ class _NeedBloodState extends State<NeedBlood> {
                                 child: ListTile(
                                   onTap: (){
                                     setState(() {
-                                      showDilogBox(Name,Contact,Age,Address,Blood_Group);
+                                      showDilogBox(Name,Contact,Age,Address,id);
                                     });
                                   },
                                 leading: Icon(Icons.edit),
@@ -145,29 +146,28 @@ class _NeedBloodState extends State<NeedBlood> {
       ),
     );
   }
-  Future<void> showDilogBox(String Name,String Contact,String Age,String Address,String Blood_Group)async{
+  Future<void> showDilogBox(String Name,String Contact,String Age,String Address,String id)async{
     GlobalKey<FormState> formKey =GlobalKey<FormState>();
     editname.text=Name;
     editContact.text=Contact;
     editAge.text=Age;
     editAddress.text=Address;
-    edditBloodGroup.text=Blood_Group;
     return showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             title:Text('Update'),
-            content: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Container(
-                child: Column(
-                  children: [
-                    Form(
-                        key: formKey,
-                        child: Column(
-                          children: [
-                            Padding(padding: EdgeInsets.symmetric(horizontal: 20),
-                              child: TextFormField(
+            content:SingleChildScrollView(
+              child:  Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Container(
+                  child: Column(
+                    children: [
+                      Form(
+                          key: formKey,
+                          child: Column(
+                            children: [
+                              TextFormField(
                                 controller: editname,
                                 decoration:const InputDecoration(
                                     prefixIcon: Icon(Icons.person_outline_rounded),
@@ -183,108 +183,72 @@ class _NeedBloodState extends State<NeedBlood> {
                                   ),
                                 ],
                               ),
-                            ),
-                            const  SizedBox(height: 20,),
-                            Padding(padding:const EdgeInsets.symmetric(horizontal: 20),
-                              child:TextFormField(
-                                keyboardType: TextInputType.phone,
-                                controller: editContact,
-                                decoration: const InputDecoration(
-                                  prefixIcon: Icon(Icons.phone_outlined),
-                                  hintText: 'Contact',
+                              const  SizedBox(height: 20,),
+                              TextFormField(
+                                  keyboardType: TextInputType.phone,
+                                  controller: editContact,
+                                  decoration: const InputDecoration(
+                                    prefixIcon: Icon(Icons.phone_outlined),
+                                    hintText: 'Contact',
+                                  ),
+                                  validator: (value) {
+                                    if (value!.isEmpty) {
+                                      return 'Enter Contact';
+                                    }
+                                    if (!_isValidPhoneNumber(value)) {
+                                      return 'Invalid Contact';
+                                    }
+                                    return null;
+                                  },
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                      RegExp(r'^[0-9]*$'), // Pattern for allowing only numeric digits
+                                    ),
+                                  ],
                                 ),
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Enter Contact';
-                                  }
-                                  if (!_isValidPhoneNumber(value)) {
-                                    return 'Invalid Contact';
-                                  }
-                                  return null;
-                                },
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.allow(
-                                    RegExp(r'^[0-9]*$'), // Pattern for allowing only numeric digits
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const    SizedBox(height: 20,),
-                            Padding(padding:const EdgeInsets.symmetric(horizontal: 20),
-                              child: TextFormField(
-                                controller: editAddress,
-                                decoration:const InputDecoration(
-                                    prefixIcon: Icon(Icons.home_outlined),
-                                    hintText: 'Address'
-                                ) ,
-                                validator: (value) {
-                                  if(value!.isEmpty){
-                                    return 'Enter Address';
-                                  }},
-                              ),
-                            ),
-                            const   SizedBox(height: 20,),
-                            Padding(padding:const EdgeInsets.symmetric(horizontal: 20),
-                              child: TextFormField(
-                                keyboardType: TextInputType.number,
-                                controller: editAge,
-                                decoration:const InputDecoration(
-                                    prefixIcon: Icon(Icons.timeline_outlined),
-                                    hintText: 'Age'
-                                ) ,
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Enter Age';
-                                  }
-                                  if (!_isValidAge(value)) {
-                                    return 'Invalid Age';
-                                  }
-                                  return null;
-                                },
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.allow(
-                                    RegExp(r'^[0-9]*$'), // Pattern for allowing only numeric digits
-                                  ),
-                                  LengthLimitingTextInputFormatter(2),
-                                ],
-                              ),
-                            ),
-                            const  SizedBox(height: 20,),
-                            Padding(padding:const EdgeInsets.symmetric(horizontal: 20),
-                              child:  DropdownButton(
-                                  underline: Container(
-                                    height: 2,
-                                    color: darkRed(),
-                                  ),
-                                  borderRadius: BorderRadius.circular(20),
-                                  hint:Text('Select Blood Group'),
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      color: darkRed()
-                                  ),
-                                  isExpanded: true,
-                                  value: bloodGroup,
-                                  icon: const Icon(Icons.keyboard_arrow_down),
-                                  items: items.map((String items) {
-                                    return DropdownMenuItem(
+                              const    SizedBox(height: 20,),
+                        TextFormField(
+                                  controller: editAddress,
+                                  decoration:const InputDecoration(
+                                      prefixIcon: Icon(Icons.home_outlined),
+                                      hintText: 'Address'
+                                  ) ,
+                                  validator: (value) {
+                                    if(value!.isEmpty){
+                                      return 'Enter Address';
+                                    }},
+                                ),
 
-                                      value: items,
-                                      child: Text(items),
-                                    );
-                                  }).toList(),
-                                  onChanged: (String? newValue) {
-                                    setState(() {
-                                      bloodGroup = newValue!;
-                                    });
-                                  }
-                              ),
+                              const   SizedBox(height: 20,),
+                               TextFormField(
+                                  keyboardType: TextInputType.number,
+                                  controller: editAge,
+                                  decoration:const InputDecoration(
+                                      prefixIcon: Icon(Icons.timeline_outlined),
+                                      hintText: 'Age'
+                                  ) ,
+                                  validator: (value) {
+                                    if (value!.isEmpty) {
+                                      return 'Enter Age';
+                                    }
+                                    if (!_isValidAge(value)) {
+                                      return 'Invalid Age';
+                                    }
+                                    return null;
+                                  },
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                      RegExp(r'^[0-9]*$'), // Pattern for allowing only numeric digits
+                                    ),
+                                    LengthLimitingTextInputFormatter(2),
+                                  ],
+                                ),
 
-                            ),
-
-                            const   SizedBox(height: 20,),
-                          ],
-                        )),
-                  ],
+                              const   SizedBox(height: 20,),
+                            ],
+                          )),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -296,9 +260,9 @@ class _NeedBloodState extends State<NeedBlood> {
                     'Address': editAddress.text.toLowerCase(),
                     'Contact': editContact.text.toLowerCase(),
                     'age': editAge.text.toLowerCase(),
-                    'Blood_Group': edditBloodGroup.toString(),
                   });
                 }
+                Navigator.pop(context);
               }, child: Text('Edit')),
               TextButton(onPressed: (){
                 Navigator.pop(context);
