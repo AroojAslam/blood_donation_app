@@ -204,7 +204,9 @@ class _BloodDonationState extends State<BloodDonation> {
                         setState(() {
                           loading=true;
                         });
-                        databaseref.child(DateTime.now().millisecondsSinceEpoch.toString()).set({
+                        String id = DateTime.now().millisecondsSinceEpoch.toString();
+                        databaseref.child(id).set({
+                            'id': id,
                             'Name': nameController.text.toString(),
                             'Address': addressController.text.toString(),
                             'Contact': contactController.text.toString(),
