@@ -4,15 +4,13 @@ import 'UI/constants.dart';
 import 'UI/splash_screen.dart';
 
 void main()async {
-  runApp(const MyApp());
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp();
+  await Firebase.initializeApp();
+  runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
+   MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,7 +20,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: darkRed()),
         useMaterial3: true,
       ),
-      home: const SplashScreen(),
+      home: SplashScreen(),
     );
   }
 }

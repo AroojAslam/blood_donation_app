@@ -4,6 +4,7 @@
 import 'package:blood_donation_app/UI/Pages/chose_type.dart';
 import 'package:blood_donation_app/UI/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -15,7 +16,9 @@ class BloodDonation extends StatefulWidget {
 }
 
 class _BloodDonationState extends State<BloodDonation> {
-  String dropdownvalue = 'A+';
+  bool loading =false;
+  final databaseref = FirebaseDatabase.instance.ref('Doner_Data');
+  String bloodGroup = 'A+';
   var items = [
     'A+',
     'A-',
@@ -170,7 +173,7 @@ class _BloodDonationState extends State<BloodDonation> {
                                       color: darkRed()
                                   ),
                                   isExpanded: true,
-                                  value: dropdownvalue,
+                                  value: bloodGroup,
                                   icon: const Icon(Icons.keyboard_arrow_down),
                                   items: items.map((String items) {
                                     return DropdownMenuItem(
@@ -181,7 +184,7 @@ class _BloodDonationState extends State<BloodDonation> {
                                   }).toList(),
                                   onChanged: (String? newValue) {
                                     setState(() {
-                                      dropdownvalue = newValue!;
+                                      bloodGroup = newValue!;
                                     });
                                   }
                               ),
@@ -193,11 +196,33 @@ class _BloodDonationState extends State<BloodDonation> {
                     )),
                   const  SizedBox(height: 20,),
                     MyButton(
+                      loading: loading,
                       context: context,
                       text: 'Add',
                       ontap:   () {
                       if(formKey.currentState!.validate()){
-                        _showSuccessDialog(context);
+                        setState(() {
+                          loading=true;
+                        });
+                        databaseref.child(DateTime.now().millisecondsSinceEpoch.toString()).set({
+                            'Name': nameController.text.toString(),
+                            'Address': addressController.text.toString(),
+                            'Contact': contactController.text.toString(),
+                            'age': ageController.text.toString(),
+                            'Blood_Group': bloodGroup.toString(),
+                          }
+                        ).then((value) {
+                          _showSuccessDialog(context);
+                          setState(() {
+                            loading=false;
+                          });
+                        }).onError((error, stackTrace){
+                          Utils().toastmessage(error.toString());
+                          setState(() {
+                            loading=false;
+                          });
+                        });
+
                       }
                       },
                     ),
@@ -226,7 +251,7 @@ class _BloodDonationState extends State<BloodDonation> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          content: Column(
+          content:const  Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(

@@ -25,20 +25,7 @@ class Utils{
   }
 
 }
-void isLogIn(BuildContext context){
-  final auth = FirebaseAuth.instance;
-  final user = auth.currentUser;
-  if(user != null){
-    Timer(Duration(seconds: 3),() {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => ChoosePage(),));
-    },);
-  }else{
-    Timer(Duration(seconds: 3),() {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => LogIn(),));
-    },);
-  }
 
-}
 Widget customCard(Color color, String imagePath, String text, Color textColor,VoidCallback ontap ) {
   return Card(
     elevation: 5,
