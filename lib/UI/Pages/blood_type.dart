@@ -1,5 +1,5 @@
 
-import 'package:blood_donation_app/UI/Pages/need_blood.dart';
+import 'package:blood_donation_app/UI/Pages/donar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -50,14 +50,14 @@ class _BloodTypsState extends State<BloodTyps> {
                   bloodGroupCard(
                     "A+",
                         () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => NeedBlood(blood_type: 'A+'),));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => Doner(blood_type: 'A+'),));
                     },
                   ),
                   SizedBox(height: 30),
                   bloodGroupCard(
                     "A-",
                         () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => NeedBlood(blood_type: 'A-'),));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => Doner(blood_type: 'A-'),));
                     },
                   ),
                 ],),
@@ -68,14 +68,14 @@ class _BloodTypsState extends State<BloodTyps> {
                   bloodGroupCard(
                     "B+",
                         () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => NeedBlood(blood_type: 'B+'),));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => Doner(blood_type: 'B+'),));
                     },
                   ),
                   SizedBox(height: 30),
                   bloodGroupCard(
                     "B-",
                         () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => NeedBlood(blood_type: 'B-'),));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => Doner(blood_type: 'B-'),));
                     },
                   ),
                 ],),
@@ -86,14 +86,14 @@ class _BloodTypsState extends State<BloodTyps> {
                   bloodGroupCard(
                     "AB+",
                         () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => NeedBlood(blood_type: 'AB+'),));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => Doner(blood_type: 'AB+'),));
                     },
                   ),
                   SizedBox(height: 30),
                   bloodGroupCard(
                     "AB-",
                         () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => NeedBlood(blood_type: 'AB-'),));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => Doner(blood_type: 'AB-'),));
                     },
                   ),
                 ],),
@@ -104,14 +104,14 @@ class _BloodTypsState extends State<BloodTyps> {
                   bloodGroupCard(
                     "O+",
                         () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => NeedBlood(blood_type: 'O+'),));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => Doner(blood_type: 'O+'),));
                     },
                   ),
                   SizedBox(height: 30),
                   bloodGroupCard(
                     "O-",
                         () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => NeedBlood(blood_type: 'O-'),));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => Doner(blood_type: 'O-'),));
                     },
                   ),
                 ],),

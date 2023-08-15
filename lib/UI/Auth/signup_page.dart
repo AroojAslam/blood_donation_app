@@ -46,6 +46,7 @@ class _SignUpState extends State<SignUp> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
+        backgroundColor: darkRed(),
         title: Text('Blood Donation',style: TextStyle(color: Colors.white),),
       ),
       body: SafeArea(

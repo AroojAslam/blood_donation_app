@@ -7,14 +7,14 @@ import 'package:flutter/services.dart';
 import '../constants.dart';
 import 'blood_type.dart';
 
-class NeedBlood extends StatefulWidget {
-  const NeedBlood({super.key,required this.blood_type});
+class Doner extends StatefulWidget {
+  const Doner({super.key,required this.blood_type});
  final blood_type;
   @override
-  State<NeedBlood> createState() => _NeedBloodState();
+  State<Doner> createState() => _DonerState();
 }
 
-class _NeedBloodState extends State<NeedBlood> {
+class _DonerState extends State<Doner> {
   String bloodGroup = 'A+';
   var items = [
     'A+',
@@ -39,7 +39,7 @@ class _NeedBloodState extends State<NeedBlood> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: darkRed(),
-        title: Text('Need Blood',style: TextStyle(color: Colors.white),),
+        title: Text('Doner',style: TextStyle(color: Colors.white),),
         leading: IconButton(
           icon: Icon(Icons.arrow_back,color: Colors.white),
           onPressed: (){
@@ -53,52 +53,57 @@ class _NeedBloodState extends State<NeedBlood> {
             SizedBox(height: 10,),
             Expanded(
               child: FirebaseAnimatedList(
-                query:ref ,
+                query: ref,
                 itemBuilder: (context, snapshot, animation, index) {
-                  final Blood_Group =snapshot.child('Blood_Group').value.toString();
-                  final Name=snapshot.child('Name').value.toString();
-                  final Contact=snapshot.child('Contact').value.toString();
-                  final Age=snapshot.child('age').value.toString();
-                  final Address=snapshot.child('Address').value.toString();
-                  final id =snapshot.child('id').value.toString();
-                  if(Blood_Group.toLowerCase().contains(widget.blood_type.toLowerCase().toString())){
-                    return  Padding(
+                  final Blood_Group = snapshot.child('Blood_Group').value.toString();
+                  final Name = snapshot.child('Name').value.toString();
+                  final Contact = snapshot.child('Contact').value.toString();
+                  final Age = snapshot.child('age').value.toString();
+                  final Address = snapshot.child('Address').value.toString();
+                  final id = snapshot.child('id').value.toString();
+                  if (Blood_Group.toLowerCase().contains(widget.blood_type.toLowerCase().toString())) {
+                    return Padding(
                       padding: EdgeInsets.symmetric(horizontal: 10),
                       child: Card(
-
                         child: ListTile(
                           trailing: PopupMenuButton(
                             icon: Icon(Icons.more_vert_outlined),
-                            itemBuilder: (context) =>[
+                            itemBuilder: (context) => [
                               PopupMenuItem(
-                                 value:1,
+                                value: 1,
                                 child: ListTile(
-                                  onTap: (){
+                                  onTap: () {
                                     setState(() {
-                                      showDilogBox(Name,Contact,Age,Address,id);
+                                      showDilogBox(Name, Contact, Age, Address, id);
                                     });
                                   },
-                                leading: Icon(Icons.edit),
-                                title: Text('Edit'),
-                              ),
+                                  leading: Icon(Icons.edit),
+                                  title: Text('Edit'),
+                                ),
                               ),
                               PopupMenuItem(
-                                onTap: (){
+                                onTap: () {
                                   ref.child(snapshot.child('id').value.toString()).remove();
                                 },
-                                value:1,
+                                value: 1,
                                 child: ListTile(
                                   leading: Icon(Icons.delete),
                                   title: Text('Delete'),
                                 ),
                               ),
                             ],
-                          ),
-                          leading:CircleAvatar(
-                            radius: 30,
-                            child: Text(snapshot.child('Blood_Group').value.toString(),style: TextStyle(fontSize: 20,),),
                           ) ,
-                          title:Text(snapshot.child('Name').value.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.w700)) ,
+                          leading: CircleAvatar(
+                            radius: 30,
+                            child: Text(
+                              snapshot.child('Blood_Group').value.toString(),
+                              style: TextStyle(fontSize: 20),
+                            ),
+                          ),
+                          title: Text(
+                            snapshot.child('Name').value.toString(),
+                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                          ),
                           subtitle: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -134,12 +139,12 @@ class _NeedBloodState extends State<NeedBlood> {
                         ),
                       ),
                     );
-                  }else{
-                    return Container(
-                    );
+                  } else {
+                    return Container();
                   }
                 },
               ),
+
             ),
           ],
         )

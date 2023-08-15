@@ -31,9 +31,9 @@ class _ChoosePageState extends State<ChoosePage> {
             title:const Text('Blood Donation',style: TextStyle(color: Colors.white)),
             actions: [
               IconButton(onPressed: (){
-              auth.signOut().then((value) => {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => SplashScreen(),))
-              });
+                setState(() {
+                  _showSuccessDialog(context);
+                });
               }, icon:const Icon(Icons.logout, color:Colors.white))
             ],
           ),
@@ -69,5 +69,40 @@ class _ChoosePageState extends State<ChoosePage> {
           )
         ),
     )  ;
+  }
+  void _showSuccessDialog(BuildContext context) {
+    showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content:const  Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(height: 16.0),
+              Text(
+                'Are You Sure !\nyou want to LogOut',
+                style: TextStyle(fontSize: 18.0),textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                auth.signOut().then((value) => {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => SplashScreen(),))
+                });
+              },
+              child: Text('Yes'),
+            ),
+            TextButton(
+              onPressed: () {
+               Navigator.pop(context);
+              },
+              child: Text('Cancel'),
+            ),
+          ],
+        );
+      },
+    );
   }
 }
