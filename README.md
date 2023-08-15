@@ -1,4 +1,4 @@
-# blood_donation_app
+# Blood Donation
 
 A new Flutter project.
 
