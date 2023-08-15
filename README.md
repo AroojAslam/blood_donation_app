@@ -1,13 +1,11 @@
 # Blood Donation
 
-A new Flutter project.
 
-## Getting Started
+## Authentication Screens
 
-![Purple App Phone Mockup Sales Marketing Presentation](https://github.com/AroojAslam/blood_donation_app/assets/101873027/1849bd29-7a03-4b16-a94e-fd6c9310045f)
-
-![Purple App Phone Mockup Sales Marketing Presentation (1)](https://github.com/AroojAslam/blood_donation_app/assets/101873027/584cd9af-95bb-482f-be2e-d0dc8c9a6559)
-
+![Purple App Phone Mockup Sales Marketing Presentation (3)](https://github.com/AroojAslam/blood_donation_app/assets/101873027/eda5f4df-7b99-4d26-aa97-595e210b8ee5)
+## Main Screens
+![Purple App Phone Mockup Sales Marketing Presentation (4)](https://github.com/AroojAslam/blood_donation_app/assets/101873027/c52b86de-2e6a-465d-856a-d4903f6a3143)
 
 - [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
