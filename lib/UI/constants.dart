@@ -114,8 +114,8 @@ Widget  MyButton({required String text, required VoidCallback ontap, bool loadin
         decoration: BoxDecoration(color: darkRed(),
           borderRadius: BorderRadius.circular(20),
         ),
-        child: loading ? CircularProgressIndicator(color: Colors.white,):
-        Center(child: Text(text,style: TextStyle(color: Colors.white,fontSize: 18),)),
+        child: loading ?const CircularProgressIndicator(color: Colors.white,):
+        Center(child: Text(text,style:const TextStyle(color: Colors.white,fontSize: 18),)),
       ),
     ),
   );
