@@ -39,9 +39,9 @@ class _DonerState extends State<Doner> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: darkRed(),
-        title: Text('Doner',style: TextStyle(color: Colors.white),),
+        title:const Text('Doner',style: TextStyle(color: Colors.white),),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back,color: Colors.white),
+          icon:const Icon(Icons.arrow_back,color: Colors.white),
           onPressed: (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => BloodTyps(),));
           },
@@ -50,7 +50,7 @@ class _DonerState extends State<Doner> {
       body: SafeArea(
         child: Column(
           children: [
-            SizedBox(height: 10,),
+            const  SizedBox(height: 10,),
             Expanded(
               child: FirebaseAnimatedList(
                 query: ref,
@@ -63,11 +63,11 @@ class _DonerState extends State<Doner> {
                   final id = snapshot.child('id').value.toString();
                   if (Blood_Group.toLowerCase().contains(widget.blood_type.toLowerCase().toString())) {
                     return Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      padding:const EdgeInsets.symmetric(horizontal: 10),
                       child: Card(
                         child: ListTile(
                           trailing: PopupMenuButton(
-                            icon: Icon(Icons.more_vert_outlined),
+                            icon:const Icon(Icons.more_vert_outlined),
                             itemBuilder: (context) => [
                               PopupMenuItem(
                                 value: 1,
@@ -86,7 +86,7 @@ class _DonerState extends State<Doner> {
                                   ref.child(snapshot.child('id').value.toString()).remove();
                                 },
                                 value: 1,
-                                child: ListTile(
+                                child:const ListTile(
                                   leading: Icon(Icons.delete),
                                   title: Text('Delete'),
                                 ),
@@ -97,39 +97,39 @@ class _DonerState extends State<Doner> {
                             radius: 30,
                             child: Text(
                               snapshot.child('Blood_Group').value.toString(),
-                              style: TextStyle(fontSize: 20),
+                              style:const TextStyle(fontSize: 20),
                             ),
                           ),
                           title: Text(
                             snapshot.child('Name').value.toString(),
-                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                            style:const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                           ),
                           subtitle: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Divider(endIndent: 20),
+                              const Divider(endIndent: 20),
                               Row(
                                 children: [
-                                  Icon(Icons.phone, size: 20,color: Colors.black),
-                                  SizedBox(width: 15,),
+                                  const   Icon(Icons.phone, size: 20,color: Colors.black),
+                                  const   SizedBox(width: 15,),
                                   Text(snapshot.child('Contact').value.toString()),
 
                                 ],
                               ),
-                              SizedBox(height: 10,),
+                              const  SizedBox(height: 10,),
                               Row(
                                 children: [
-                                  Icon(Icons.timeline_outlined, size: 20,color: Colors.black),
-                                  SizedBox(width: 15,),
+                                  const   Icon(Icons.timeline_outlined, size: 20,color: Colors.black),
+                                  const  SizedBox(width: 15,),
                                   Text(snapshot.child('age').value.toString()),
                                 ],
                               ),
-                              SizedBox(height: 10,),
+                              const   SizedBox(height: 10,),
                               Row(
                                 children: [
-                                  Icon(Icons.location_on_outlined,
+                                  const  Icon(Icons.location_on_outlined,
                                     size: 20,color: Colors.black,),
-                                  SizedBox(width: 15,),
+                                  const SizedBox(width: 15,),
                                   Text(snapshot.child('Address').value.toString()),
 
                                 ],

@@ -22,9 +22,9 @@ class _BloodTypsState extends State<BloodTyps> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: darkRed(),
-        title: Text('Blood Type',style: TextStyle(color: Colors.white),),
+        title:const Text('Blood Type',style: TextStyle(color: Colors.white),),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back,color: Colors.white),
+          icon:const Icon(Icons.arrow_back,color: Colors.white),
           onPressed: (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => ChoosePage(),));
           },
@@ -35,83 +35,83 @@ class _BloodTypsState extends State<BloodTyps> {
           child: Column(
 
             children: [
-              Image(
+              const  Image(
                   height: 250,
                   width: 250,
                   image: AssetImage('assets/images/blood_type.png')),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               Text('Select Blood Type',style: TextStyle(color: darkRed(),fontSize: 25,fontWeight: FontWeight.bold),),
-              Divider(endIndent: 35,indent: 35),
+              const  Divider(endIndent: 35,indent: 35),
 
-              SizedBox(height: 30,),
+              const  SizedBox(height: 30,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   bloodGroupCard(
                     "A+",
                         () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => Doner(blood_type: 'A+'),));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) =>const Doner(blood_type: 'A+'),));
                     },
                   ),
-                  SizedBox(height: 30),
+                  const    SizedBox(height: 30),
                   bloodGroupCard(
                     "A-",
                         () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => Doner(blood_type: 'A-'),));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) =>const Doner(blood_type: 'A-'),));
                     },
                   ),
                 ],),
-              SizedBox(height: 10,),
+              const  SizedBox(height: 10,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   bloodGroupCard(
                     "B+",
                         () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => Doner(blood_type: 'B+'),));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) =>const Doner(blood_type: 'B+'),));
                     },
                   ),
-                  SizedBox(height: 30),
+                  const   SizedBox(height: 30),
                   bloodGroupCard(
                     "B-",
                         () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => Doner(blood_type: 'B-'),));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) =>const Doner(blood_type: 'B-'),));
                     },
                   ),
                 ],),
-              SizedBox(height: 10,),
+              const   SizedBox(height: 10,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   bloodGroupCard(
                     "AB+",
                         () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => Doner(blood_type: 'AB+'),));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) =>const Doner(blood_type: 'AB+'),));
                     },
                   ),
-                  SizedBox(height: 30),
+                  const  SizedBox(height: 30),
                   bloodGroupCard(
                     "AB-",
                         () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => Doner(blood_type: 'AB-'),));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) =>const Doner(blood_type: 'AB-'),));
                     },
                   ),
                 ],),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   bloodGroupCard(
                     "O+",
                         () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => Doner(blood_type: 'O+'),));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) =>const Doner(blood_type: 'O+'),));
                     },
                   ),
-                  SizedBox(height: 30),
+                  const   SizedBox(height: 30),
                   bloodGroupCard(
                     "O-",
                         () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => Doner(blood_type: 'O-'),));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) =>const Doner(blood_type: 'O-'),));
                     },
                   ),
                 ],),

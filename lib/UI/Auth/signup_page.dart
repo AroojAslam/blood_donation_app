@@ -47,7 +47,7 @@ class _SignUpState extends State<SignUp> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: darkRed(),
-        title: Text('Blood Donation',style: TextStyle(color: Colors.white),),
+        title: const Text('Blood Donation',style: TextStyle(color: Colors.white),),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -56,24 +56,24 @@ class _SignUpState extends State<SignUp> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(height: 30,),
-                  Image(
+                 const SizedBox(height: 30,),
+                const  Image(
                       height: 150,
                       width: 150,
                       image: AssetImage('assets/images/need_blood.png')),
-                  SizedBox(height: 20,),
+                  const SizedBox(height: 20,),
                   Text('SignUp',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: darkRed()),),
-                  SizedBox(height: 10,),
-                  Text('Welcome to Blood Donation',style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.w400),),
-                  SizedBox(height: 20,),
+                  const SizedBox(height: 10,),
+                  const Text('Welcome to Blood Donation',style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.w400),),
+                  const  SizedBox(height: 20,),
                   Form(
                     key: formKey,
                       child: Column(
                     children: [
-                      Padding(padding: EdgeInsets.symmetric(horizontal: 20),
+                      Padding(padding:const EdgeInsets.symmetric(horizontal: 20),
                         child: TextFormField(
                           controller: emailController,
-                          decoration:InputDecoration(
+                          decoration:const InputDecoration(
                             prefixIcon: Icon(Icons.email_outlined),
                               hintText: 'Email'
                           ) ,
@@ -84,24 +84,24 @@ class _SignUpState extends State<SignUp> {
                           },
                         ),
                       ),
-                      SizedBox(height: 20,),
-                      Padding(padding: EdgeInsets.symmetric(horizontal: 20),
+                      const   SizedBox(height: 20,),
+                      Padding(padding:const EdgeInsets.symmetric(horizontal: 20),
                         child: TextFormField(
                           obscureText: showPassword,
                           controller: passwordController,
                           decoration:InputDecoration(
-                              prefixIcon: Icon(Icons.lock_outline),
+                              prefixIcon:const Icon(Icons.lock_outline),
                               suffixIcon: showPassword? IconButton(onPressed: (){
                                 setState(() {
                                   showPassword=!showPassword;
                                 });
                               },
-                                  icon: Icon(Icons.remove_red_eye_outlined)):
+                                  icon:const Icon(Icons.remove_red_eye_outlined)):
                               IconButton(onPressed: (){
                                 setState(() {
                                   showPassword=!showPassword;
                                 });
-                              }, icon: Icon(Icons.visibility_off_outlined,)),
+                              }, icon:const Icon(Icons.visibility_off_outlined,)),
                               hintText: 'Password'
                           ) ,
                           validator: (value) {
@@ -111,11 +111,11 @@ class _SignUpState extends State<SignUp> {
                           },
                         ),
                       ),
-                      SizedBox(height: 40,),
+                      const SizedBox(height: 40,),
 
                     ],
                   )),
-                  SizedBox(height: 20,),
+                  const SizedBox(height: 20,),
                   MyButton(
                     context: context,
                     text: 'Sign Up',
@@ -124,14 +124,14 @@ class _SignUpState extends State<SignUp> {
                         signUp();
                     },
                   ),
-                  SizedBox(height: 10,),
+                  const   SizedBox(height: 10,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Already have an Account ',style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.w400),),
+                      const  Text('Already have an Account ',style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.w400),),
                       TextButton(onPressed: (){
                         Navigator.push(context, MaterialPageRoute(builder: (context) => LogIn(),));
-                      }, child: Text('LogIn'))
+                      }, child:const Text('LogIn'))
                     ],
                   )
                 ],

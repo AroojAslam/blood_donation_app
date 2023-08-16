@@ -24,7 +24,7 @@ class _LogInState extends State<LogIn> {
         setState(() {
           loading=false;
         }),
-        Navigator.push(context, MaterialPageRoute(builder: (context) => ChoosePage(),)),
+        Navigator.push(context, MaterialPageRoute(builder: (context) =>const ChoosePage(),)),
         Utils().toastmessage(value.user!.email.toString())
       }).onError((error, stackTrace) => {
         Utils().toastmessage(error.toString()),
@@ -55,16 +55,16 @@ class _LogInState extends State<LogIn> {
               child: Column(
                  mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(height: 30,),
-                  Image(
+                  const   SizedBox(height: 30,),
+                  const   Image(
                       height: 150,
                       width: 150,
                       image: AssetImage('assets/images/need_blood.png')),
-                  SizedBox(height: 20,),
+                  const  SizedBox(height: 20,),
                   Text('LogIn',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: darkRed()),),
-                  SizedBox(height: 10,),
-                  Text('Welcome to Blood Donation',style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.w400),),
-                  SizedBox(height: 20,),
+                  const   SizedBox(height: 10,),
+                  const    Text('Welcome to Blood Donation',style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.w400),),
+                  const    SizedBox(height: 20,),
                   Form(
                     key: formKey,
                       child: Column(
@@ -72,7 +72,7 @@ class _LogInState extends State<LogIn> {
                       Padding(padding: EdgeInsets.symmetric(horizontal: 20),
                         child: TextFormField(
                           controller: emailController,
-                          decoration:InputDecoration(
+                          decoration:const InputDecoration(
                             prefixIcon: Icon(Icons.email_outlined),
                               hintText: 'Email'
                           ) ,
@@ -83,8 +83,8 @@ class _LogInState extends State<LogIn> {
                           },
                         ),
                       ),
-                      SizedBox(height: 20,),
-                      Padding(padding: EdgeInsets.symmetric(horizontal: 20),
+                      const   SizedBox(height: 20,),
+                      Padding(padding:const EdgeInsets.symmetric(horizontal: 20),
                         child: TextFormField(
                           obscureText: showPassword,
                           controller: passwordController,
@@ -95,12 +95,12 @@ class _LogInState extends State<LogIn> {
                                   showPassword=!showPassword;
                                 });
                               },
-                                  icon: Icon(Icons.remove_red_eye_outlined)):
+                                  icon: const Icon(Icons.remove_red_eye_outlined)):
                               IconButton(onPressed: (){
                                 setState(() {
                                   showPassword=!showPassword;
                                 });
-                              }, icon: Icon(Icons.visibility_off_outlined,)),
+                              }, icon:const  Icon(Icons.visibility_off_outlined,)),
                               hintText: 'Password'
                           ) ,
                           validator: (value) {
@@ -110,11 +110,11 @@ class _LogInState extends State<LogIn> {
                           },
                         ),
                       ),
-                      SizedBox(height: 40,),
+                      const   SizedBox(height: 40,),
 
                     ],
                   )),
-                  SizedBox(height: 20,),
+                  const SizedBox(height: 20,),
                   MyButton(
                     context: context,
                     text: 'Log In',
@@ -123,14 +123,14 @@ class _LogInState extends State<LogIn> {
                       logIn();
                     },
                   ),
-                  SizedBox(height: 10,),
+                  const   SizedBox(height: 10,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Don\'t have an Account ',style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.w400),),
+                      const   Text('Don\'t have an Account ',style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.w400),),
                       TextButton(onPressed: (){
                         Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp(),));
-                      }, child: Text('SignUp'))
+                      }, child:const Text('SignUp'))
                     ],
                   )
                 ],

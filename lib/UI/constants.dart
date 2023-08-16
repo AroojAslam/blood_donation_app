@@ -1,14 +1,10 @@
 import 'dart:async';
 import 'dart:ui';
-
-import 'package:blood_donation_app/UI/Auth/login_page.dart';
-import 'package:blood_donation_app/UI/Pages/chose_type.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 Color darkRed(){
-  return Color.fromRGBO(167, 2, 34, 1);
+  return const Color.fromRGBO(167, 2, 34, 1);
 }
 
 class Utils{
@@ -47,7 +43,7 @@ Widget customCard(Color color, String imagePath, String text, Color textColor,Vo
             width: 120,
             image: AssetImage(imagePath),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           GestureDetector(
             onTap: ontap,
             child: Card(
@@ -104,7 +100,7 @@ Widget bloodGroupCard( String text, VoidCallback ontap ) {
   );
 }
 
-Widget MyButton({required String text, required VoidCallback ontap, bool loading=false, required BuildContext context} ){
+Widget  MyButton({required String text, required VoidCallback ontap, bool loading=false, required BuildContext context} ){
   return  GestureDetector(
     onTap:ontap ,
     child: Card(
